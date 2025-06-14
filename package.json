@@ -1,0 +1,22 @@
+{
+  "name": "aluguel-chatbot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "framer-motion": "^10.12.16",
+    "lucide-react": "^0.259.0",
+    "next": "13.4.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.1",
+    "@types/react": "^18.2.62",
+    "typescript": "^5.1.3"
+  }
+}
