@@ -5,10 +5,16 @@ import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { perguntaChatbot } from "./chatbot";
 
 export default function Home() {
 	const [chatOpen, setChatOpen] = useState(false);
 	const [chat, setChat] = useState<string[]>([]);
+	const fazerPergunta = async (pergunta: string) => {
+		setChat([...chat, pergunta]);
+		const resposta = await perguntaChatbot(pergunta);
+		setChat((prevChat) => [...prevChat, resposta]);
+	}
 	return (
 		<main style={{ minHeight: "100vh", padding: "24px" }}>
 			<h1 style={{ fontSize: "2.5rem", fontWeight: "bold", color: "#1e40af", marginBottom: "16px" }}>
@@ -58,7 +64,7 @@ export default function Home() {
 					<Button onClick={() => {
 						let input = document.getElementById("question") as HTMLInputElement;
 						if (input.value.trim() !== "") {
-							setChat([...chat, input.value]);
+							fazerPergunta(input.value.trim());
 							input.value = "";
 						}
 					}}>Enviar</Button>
