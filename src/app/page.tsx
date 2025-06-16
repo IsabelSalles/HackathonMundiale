@@ -15,23 +15,47 @@ export default function Home() {
 		const resposta = await perguntaChatbot(pergunta);
 		setChat((prevChat) => [...prevChat, resposta]);
 	}
+	const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {
+			const input = e.currentTarget;
+			if (input.value.trim() !== "") {
+				fazerPergunta(input.value.trim());
+				input.value = "";
+				input.focus();
+			}
+		}
+	};
+
 	return (
 		<main style={{ minHeight: "100vh", padding: "24px" }}>
 			<h1 style={{ fontSize: "2.5rem", fontWeight: "bold", color: "#1e40af", marginBottom: "16px" }}>
-				Aluguel de Imóveis por Temporada
+				Consultório de Acupuntura e Terapias Integrativas
 			</h1>
 			<p style={{ fontSize: "1.125rem", color: "#475569", maxWidth: "700px", marginBottom: "32px" }}>
-				Encontre o imóvel ideal para suas férias! Escolha entre casas, apartamentos e muito mais em destinos incríveis.
+				Cuidando do paciente desde o primeiro contato: agendamentos e informações na palma da mão.
 			</p>
 
 			<div className="grid" style={{ maxWidth: 900 }}>
-				{[1, 2, 3].map((id) => (
-					<Card key={id} className="shadow-md">
-						<h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "8px" }}>Apartamento {id} - Copacabana</h2>
-						<p style={{ color: "#64748b", marginBottom: "8px" }}>2 quartos • Próximo à praia • A partir de R$450/noite</p>
-						<Button>Ver Detalhes</Button>
-					</Card>
-				))}
+				<Card key={1} className="shadow-md">
+					<h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "8px" }}>Acupuntura</h2>
+					<p style={{ color: "#64748b", marginBottom: "8px" }}>Terapia a laser que ajuda a cicatrização</p>
+					<Button>Ver Detalhes</Button>
+				</Card>
+				<Card key={2} className="shadow-md">
+					<h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "8px" }}>Laserterapia</h2>
+					<p style={{ color: "#64748b", marginBottom: "8px" }}>Terapia a laser que ajuda a cicatrização</p>
+					<Button>Ver Detalhes</Button>
+				</Card>
+				<Card key={3} className="shadow-md">
+					<h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "8px" }}>Ventosaterapia</h2>
+					<p style={{ color: "#64748b", marginBottom: "8px" }}>Terapia que auxilia na dor e tratamento de coluna</p>
+					<Button>Ver Detalhes</Button>
+				</Card>
+				<Card key={4} className="shadow-md">
+					<h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "8px" }}>Moxaterapia</h2>
+					<p style={{ color: "#64748b", marginBottom: "8px" }}>Técnica da acupuntura que auxilia em vários tratamentos</p>
+					<Button>Ver Detalhes</Button>
+				</Card>
 			</div>
 
 			<motion.button
@@ -60,7 +84,12 @@ export default function Home() {
 							{message}
 						</div>
 					))}
-					<input id="question" type="text" placeholder="Digite sua mensagem..." />
+					<input
+						id="question"
+						type="text"
+						placeholder="Digite sua mensagem..." 
+						onKeyDown={keyDownHandler}
+					/>
 					<Button onClick={() => {
 						let input = document.getElementById("question") as HTMLInputElement;
 						if (input.value.trim() !== "") {
